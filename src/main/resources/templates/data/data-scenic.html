@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>景区数据</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../static/lib/layui-v2.5.5/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../static/css/public.css" media="all">
+</head>
+<body>
+<blockquote class="layui-elem-quote news_search">
+    <div class="layui-inline">
+        <form class="layui-inline" th:action="@{/selectByName}" method="post">
+            <div class="layui-input-inline">
+                <input type="text" name="NAME" required placeholder="请输入景点名称" onfocus="if (value =='请输入您的姓名'){value =''}" οnblur="if (value ==''){value='请输入您的姓名'}"
+                       class="layui-input search_input"/>
+            </div>
+            <button type="submit" class="layui-btn serch_btn">查询</button>
+        </form>
+    </div>
+    <div class="layui-inline">
+        <a class="layui-btn layui-btn-normal newsAdd_btn" href="/data/add-scenic">添加景点信息</a>
+    </div>
+    <div class="layui-inline">
+        <a class="layui-btn layui-btn-danger newsAdd_btn" href="/data/data-scenic">重置</a>
+    </div>
+
+
+    <div style="display: inline;font-size: 18px">
+        <p th:text="${tip}" style="color: skyblue; display: inline"></p>
+    </div>
+</blockquote>
+<div class="layui-form news_list">
+    <table class="layui-table">
+        <colgroup>
+            <col width="8%"/>
+            <col width="13%"/>
+            <col width="8%"/>
+            <col width="20%"/>
+            <col width="15%"/>
+            <col width="5%"/>
+            <col width="20%"/>
+
+        </colgroup>
+        <thead>
+        <tr>
+            <th>序号</th>
+            <th>景点名称</th>
+            <th>拥挤状况</th>
+            <th>景点地址</th>
+            <th>开放时间</th>
+            <th>价格</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody class="news_content">
+        <tr th:each="u : ${list}">
+            <td th:text="${u.ID}"></td>
+            <td th:text="${u.NAME}"></td>
+            <td th:text="${u.CROWD}"></td>
+            <td th:text="${u.LOCATION}"></td>
+            <td th:text="${u.OPENING}"></td>
+            <td th:text="${u.PRICE}"></td>
+            <td>
+                <a class="layui-btn layui-btn-xs" th:href="@{/toSelect/}+${u.ID}">
+                    <i class="layui-icon">&#xe60a;</i>
+                </a>
+                <a class="layui-btn layui-btn-xs layui-btn-normal" th:href="@{/toUpdate/}+${u.ID}">
+                    <i class="layui-icon">&#xe642;</i>
+                </a>
+                <a class="layui-btn layui-btn-xs layui-btn-danger" th:href="@{/toDelete/}+${u.ID}">
+                    <i class="layui-icon">&#xe640;</i>
+                </a>
+                <a type="button" class="layui-btn layui-btn-warm layui-btn-sm" th:href="@{/test1/}+${u.ID}">修改图片</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div style="color: skyblue;font-size: 18px">当前为第 <span class="layui-laypage-skip"><input type="text"
+                                                                                             name="pageNum" id="pageNum"
+                                                                                             class="layui-input1"
+                                                                                             th:value="${pageInfo.pageNum}"
+                                                                                             onkeydown="keyUp(event);"/></span>
+        页,总 <span
+                th:text="${pageInfo.pages}"></span> 页,共有 <span
+                th:text="${pageInfo.total}"></span> 条记录
+    </div>
+    <a class="layui-btn layui-btn-sm layui-bg-cyan newsAdd_btn toPageOne" th:href="@{/data/data-scenic}">首页</a>
+    <a class="layui-btn layui-btn-sm layui-bg-cyan newsAdd_btn previousPage"
+       th:href="@{/data/data-scenic(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}">上一页</a>
+    <a class="layui-btn layui-btn-sm layui-bg-cyan newsAdd_btn nextPage"
+       th:href="@{/data/data-scenic(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}">下一页</a>
+    <a class="layui-btn layui-btn-sm layui-bg-cyan newsAdd_btn toPageLast"
+       th:href="@{/data/data-scenic(pageNum=${pageInfo.pages})}">尾页</a>
+</div>
+
+
+<script src="../../static/lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
+<script>
+    function keyUp(e){
+        var evt = window.event || e;
+        var pageNum = document.getElementById("pageNum").value;
+        if(evt.keyCode == 13) {
+            window.location.href="/toPage/" + pageNum;
+        }
+    }
+
+
+</script>
+</body>
+</html>

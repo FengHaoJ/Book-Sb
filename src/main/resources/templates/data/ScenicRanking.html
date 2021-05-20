@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="../../static/layui/css/layui.css" media="all"/>
+<script src="../../static/layui/layui.js"></script>
+<script  src="../../static/js/jquery-3.5.1.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>toplist</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .toplist {
+            width: 500px;
+            height: 850px;
+            border: 1px solid #FFFDF4;
+            margin: 0px auto;
+            box-sizing: border-box;
+        }
+
+        .toplist > h1 {
+            color: deeppink;
+            font-size: 20px;
+            border-bottom: 1px dashed #FFFDF4;
+            padding: 10px;
+        }
+
+        .toplist > ul {
+            list-style: none;
+        }
+
+        .toplist > ul li {
+            line-height: 30px;
+            border: 1px dashed #FFFDF4;
+            padding: 5px;
+        }
+
+        .toplist li > span {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background-color: #666;
+            margin-right: 10px;
+            line-height: 20px;
+            text-align: center;
+        }
+
+        /*li:nth-child(n+6)
+        选中从第6个开始的子元素
+        负方向范围
+        :nth-child(-n+9)
+        选中从第1个到第9个子元素。使用 :nth-child(-n+9) ，就相当让你选中第9个和其之前的所有子元素*/
+        .toplist ul li:nth-child(-n+3) span {
+            background-color: deeppink;
+        }
+
+        .content {
+            overflow: hidden;
+            display: none;
+        }
+
+        .toplist .content p {
+            font-size: 13px;
+        }
+
+        .content img {
+            float: left;
+        }
+
+        .content p {
+            width: 330px;
+            height: 150px;
+            float: left;
+        }
+
+        .toplist a {
+            text-decoration: none;
+            color: #000;
+        }
+
+        .current .content {
+            display: block;
+        }
+    </style>
+
+    <script>
+        $(function () {
+            var lis = $('.toplist li');
+
+            lis.hover(function () {
+                    $(this).addClass('current');
+                }
+                , function () {
+                    $(this).removeClass('current');
+                });
+        });
+    </script>
+</head>
+<body>
+<div class="toplist">
+    <h1>景点排行榜</h1>
+    <ul>
+        <li>
+            <span>1</span>
+            <a href="#">上海野生动物园</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="">浏览人数：</a>&nbsp;&nbsp;&nbsp;&nbsp; <a href="">位置：</a><br>
+            <div class="content">
+                <img src="images/上海野生动物园.jpg"
+                     alt="战狼">
+                <p>上海野生动物园，位于上海浦东新区南六公路178号，是由上海市人民政府和中国国家林业局合作建设的中国首座国家级野生动物园，占地153公顷（约2300亩），距上海市中心35公里，于1995年11月18日正式对外开放。</p>
+            </div>
+        </li>
+        <li>
+            <span>2</span>
+            <a href="#">上海野生动物园</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="">浏览人数：</a>&nbsp;&nbsp;&nbsp;&nbsp; <a href="">位置：</a><br>
+            <div class="content">
+                <img src="images/上海野生动物园.jpg"
+                     alt="战狼">
+                <p>上海野生动物园，位于上海浦东新区南六公路178号，是由上海市人民政府和中国国家林业局合作建设的中国首座国家级野生动物园，占地153公顷（约2300亩），距上海市中心35公里，于1995年11月18日正式对外开放。</p>
+            </div>
+        </li>
+        <li>
+            <span>3</span>
+            <a href="#">上海野生动物园</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="">浏览人数：</a>&nbsp;&nbsp;&nbsp;&nbsp; <a href="">位置：</a><br>
+            <div class="content">
+                <img src="images/上海野生动物园.jpg"
+                     alt="战狼">
+                <p>上海野生动物园，位于上海浦东新区南六公路178号，是由上海市人民政府和中国国家林业局合作建设的中国首座国家级野生动物园，占地153公顷（约2300亩），距上海市中心35公里，于1995年11月18日正式对外开放。</p>
+            </div>
+        </li>
+        <li>
+            <span>4</span>
+            <a href="#">上海野生动物园</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="">浏览人数：</a>&nbsp;&nbsp;&nbsp;&nbsp; <a href="">位置：</a><br>
+            <div class="content">
+                <img src="images/上海野生动物园.jpg"
+                     alt="战狼">
+                <p>上海野生动物园，位于上海浦东新区南六公路178号，是由上海市人民政府和中国国家林业局合作建设的中国首座国家级野生动物园，占地153公顷（约2300亩），距上海市中心35公里，于1995年11月18日正式对外开放。</p>
+            </div>
+        </li>
+        <li>
+            <span>5</span>
+            <a href="#">上海野生动物园</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="">浏览人数：</a>&nbsp;&nbsp;&nbsp;&nbsp; <a href="">位置：</a><br>
+            <div class="content">
+                <img src="images/上海野生动物园.jpg"
+                     alt="战狼">
+                <p>上海野生动物园，位于上海浦东新区南六公路178号，是由上海市人民政府和中国国家林业局合作建设的中国首座国家级野生动物园，占地153公顷（约2300亩），距上海市中心35公里，于1995年11月18日正式对外开放。</p>
+            </div>
+        </li>
+        <li>
+            <span>6</span>
+            <a href="#">上海野生动物园</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="">浏览人数：</a>&nbsp;&nbsp;&nbsp;&nbsp; <a href="">位置：</a><br>
+            <div class="content">
+                <img src="images/上海野生动物园.jpg"
+                     alt="战狼">
+                <p>上海野生动物园，位于上海浦东新区南六公路178号，是由上海市人民政府和中国国家林业局合作建设的中国首座国家级野生动物园，占地153公顷（约2300亩），距上海市中心35公里，于1995年11月18日正式对外开放。</p>
+            </div>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
+

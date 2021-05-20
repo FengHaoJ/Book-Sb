@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>旅游调查问卷</title>
+		<style type="text/css">
+			label {
+				height: 2em;
+				width: 5em;
+				padding: 45px;
+			}
+			body{
+				background-color: #FA8BFF;
+				background-image: linear-gradient(45deg, #FA8BFF 1%, #2BD2FF 52%, #2bffcd 97%);
+			}
+
+		</style>
+		<script src="../static/lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
+		<link rel="stylesheet" href="../static/layui/css/layui.css" media="all"/>
+	</head>
+	<body>
+		<div >
+			<h1 style="color: #30A7FA;text-align: center;">旅游调查爱好调查问卷</h1>
+		</div>
+		<hr>
+		<hr>
+		<form class="layui-form" th:method="post" th:action="@{/submit}" >
+			<div>
+				<input type="hidden" name="USERNAME" th:value="${USERNAME}">
+				<input type="hidden" name="PASSWORD" th:value="${PASSWORD}">
+			</div>
+			<div class="layui-form-item">
+				<div >
+					<label>1.请问您的年龄阶段为:</label>
+				</div>
+				<div class="layui-input-block">
+					<input type="radio" name="AGE" value="0" title="A.18岁以下" checked>
+					<input type="radio" name="AGE" value="1" title="B.18-30岁">
+					<input type="radio" name="AGE" value="2" title="C.31-40岁">
+					<input type="radio" name="AGE" value="3" title="D.41-50岁">
+					<input type="radio" name="AGE" value="4" title="E.51-60岁">
+					<input type="radio" name="AGE" value="5" title="F.60岁以上">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="">2.您最喜欢的旅游方式为</label>
+				<div class="layui-input-block">
+					<input type="checkbox" name="OPTION" value="0" title="A.自驾游" checked>
+					<input type="checkbox" name="OPTION" value="1" title="B.公共交通工具">
+					<input type="checkbox" name="OPTION" value="2" title="C.包车">
+					<input type="checkbox" name="OPTION" value="3" title="D.旅行社组织">
+					<input type="checkbox" name="OPTION" value="4" title="E.步行或自行车">
+					<input type="hidden" name="OPTION" value="5" checked>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="">3.您平时有没有关注旅游/吃喝玩乐类媒体呢？</label>
+				<div class="layui-input-block">
+					<input type="radio" name="ATTENTION" value="0" title="A.经常" checked>
+					<input type="radio" name="ATTENTION" value="1" title="B.偶尔">
+					<input type="radio" name="ATTENTION" value="2" title="C.很少">
+					<input type="radio" name="ATTENTION" value="3" title="D.没有">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<div >
+					<label class="">4.您每年旅行出行多少次？</label>
+				</div>
+				<div class="layui-input-block">
+					<input type="radio" name="FREQUENCY" value="0" title="A.0次" checked>
+					<input type="radio" name="FREQUENCY" value="1" title="B.1-2次">
+					<input type="radio" name="FREQUENCY" value="2" title="C.3-5次">
+					<input type="radio" name="FREQUENCY" value="3" title="D.6次及以上">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<div >
+					<label class="">5.您一般外出旅游的时间？</label>
+				</div>
+				<div class="layui-input-block">
+					<input type="radio" name="TIME" value="0" title="A.春季（3月-5月）" checked>
+					<input type="radio" name="TIME" value="1" title="B.夏季（6月-8月）">
+					<input type="radio" name="TIME" value="2" title="C.秋季（9月-11月）">
+					<input type="radio" name="TIME" value="3" title="D.冬季（12月-2月）">
+					<input type="radio" name="TIME" value="4" title="E.无所谓，随时都可以">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<div >
+					<label class="">6.您对下列哪些旅游类型感兴趣？</label>
+				</div>
+				<div class="layui-input-block">
+					<input type="checkbox" name="INTEREST" value="0" title="A.文化景区" checked>
+					<input type="checkbox" name="INTEREST" value="1" title="B.自然景区">
+					<input type="checkbox" name="INTEREST" value="2" title="C.节庆活动景区">
+					<input type="checkbox" name="INTEREST" value="3" title="D.游憩景区">
+					<input type="checkbox" name="INTEREST" value="4" title="E.娱乐景区">
+					<input type="hidden" name="INTEREST" value="5" checked>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="">7.您通常一次在旅游点停留多长时间？</label>
+				<div class="layui-input-block">
+					<input type="radio" name="STAY" value="0" title="A.半天" checked>
+					<input type="radio" name="STAY" value="1" title="B.一天">
+					<input type="radio" name="STAY" value="2" title="C.2-3天">
+					<input type="radio" name="STAY" value="3" title="D.4-5天">
+					<input type="radio" name="STAY" value="4" title="E.一周或者更长">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="">8.您通常外出一次旅游的最长时间:</label>
+				<div class="layui-input-block">
+					<input type="radio" name="LONGESTTIME" value="0" title="A.1天" checked>
+					<input type="radio" name="LONGESTTIME" value="1" title="B.2天">
+					<input type="radio" name="LONGESTTIME" value="2" title="C.3天">
+					<input type="radio" name="LONGESTTIME" value="3" title="D.4-7天">
+					<input type="radio" name="LONGESTTIME" value="4" title="E.一周或者更长">
+				</div>
+			</div>
+<!--			<div class="layui-form-item">-->
+<!--				<div >-->
+<!--					<label class="">9.您外出一次旅游可以接受的总消费金额？</label>-->
+<!--				</div>-->
+<!--				<div class="layui-input-block">-->
+<!--					<input type="radio" name="CITY" value="0" title="A.200元以内" checked>-->
+<!--					<input type="radio" name="CITY" value="1" title="B.201-1000元">-->
+<!--					<input type="radio" name="CITY" value="2" title="C.1001-3000元">-->
+<!--					<input type="radio" name="CITY" value="3" title="D.3001-10000元">-->
+<!--					<input type="radio" name="CITY" value="4" title="E.10000元以上">-->
+<!--				</div>-->
+<!--			</div>-->
+			<div class="layui-form-item" pane="">
+				<label class="">9.您经常和谁一起旅游:</label>
+				<div class="layui-input-block">
+					<input type="checkbox" name="WITH" value="0" lay-skin="primary" title="A.家人" checked>
+					<input type="checkbox" name="WITH" value="1" lay-skin="primary" title="B.恋人">
+					<input type="checkbox" name="WITH" value="2" lay-skin="primary" title="C.朋友">
+					<input type="checkbox" name="WITH" value="3" lay-skin="primary" title="D.同学">
+					<input type="checkbox" name="WITH" value="4" lay-skin="primary" title="E.同事">
+					<input type="checkbox" name="WITH" value="5" lay-skin="primary" title="F.独自">
+					<input type="checkbox" name="WITH" value="6" lay-skin="primary" title="G.旅行团">
+					<input type="checkbox" name="WITH" value="7" lay-skin="primary" title="H.驴友">
+					<input type="checkbox" name="WITH" value="8" lay-skin="primary" title="I.其他">
+					<input type="hidden" name="WITH" value="7" checked>
+				</div>
+			</div>
+			<div class="layui-form-item" pane="">
+				<label class="">10.您最为关注旅游出行的哪些问题？</label>
+				<div class="layui-input-block">
+					<input type="checkbox" name="CAREQUESTION" value="0" title="A.景区服务质量" checked>
+					<input type="checkbox" name="CAREQUESTION" value="1" title="B.景区人流量">
+					<input type="checkbox" name="CAREQUESTION" value="2" title="C.交通出行状况">
+					<input type="checkbox" name="CAREQUESTION" value="3" title="D.天气状态">
+					<input type="checkbox" name="CAREQUESTION" value="4" title="E.价格">
+					<input type="checkbox" name="CAREQUESTION" value="5" title="F.宾馆、餐厅配套设施">
+					<input type="checkbox" name="CAREQUESTION" value="6" title="G.其他">
+					<input type="hidden" name="CAREQUESTION" value="7" checked>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<div >
+					<label class="">11.您往常的出游距离范围是什么？</label>
+				</div>
+				<div class="layui-input-block">
+					<input type="radio" name="DISTANCE" value="0" title="A.30公里以内" checked>
+					<input type="radio" name="DISTANCE" value="1" title="B.30-100公里">
+					<input type="radio" name="DISTANCE" value="2" title="C.100-300公里">
+					<input type="radio" name="DISTANCE" value="3" title="D.300公里以外">
+				</div>
+			</div>
+
+			<div class="layui-form-item">
+				<label class="">12.您喜欢主题旅游吗？</label>
+				<div class="layui-input-block">
+					<input type="radio" name="LIKE" value="0" title="A.喜欢" checked>
+					<input type="radio" name="LIKE" value="1" title="B.不喜欢" >
+					<input type="radio" name="LIKE" value="2" title="C.无所谓">
+				</div>
+			</div>
+
+			<div class="layui-form-item" >
+				<label class="">13.你在出游前，最关心目的地的哪些信息？</label>
+				<div class="layui-input-block">
+					<input type="radio" name="CARE" value="0" lay-skin="primary" title="A.游玩项目" checked>
+					<input type="radio" name="CARE" value="1" lay-skin="primary" title="B.购物">
+					<input type="radio" name="CARE" value="2" lay-skin="primary" title="C.美食">
+					<input type="radio" name="CARE" value="3" lay-skin="primary" title="D.民风民俗">
+				</div>
+			</div>
+			<div class="layui-form-item" >
+				<div class="layui-input-block">
+					<button class="layui-btn" lay-filter="formDemo" type="submit" id="btn1">立即提交</button>
+					<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+					<button class="layui-btn layui-btn-warm" type="submit" lay-filter="formDemo">跳过</button>
+				</div>
+			</div>
+		</form>
+
+		<script>
+			//Demo
+			layui.use('form', function(){
+				var form = layui.form;
+
+				//监听提交
+				form.on('submit(formDemo)', function(data){
+					layer.msg(JSON.stringify(data.field));
+					return false;
+				});
+			});
+		</script>
+<!--		<script>-->
+<!--			function a1(){-->
+<!--				var m1=document.getElementsByName('OPTION').value;-->
+<!--				var m2=document.getElementsByName('INTEREST').value;-->
+<!--				var m3=document.getElementsByName('WITH').value;-->
+<!--				var m4=document.getElementsByName('CAREQUESTION').value;-->
+<!--				if(m1==null || m2==null || m3==null ||m4==null){-->
+<!--					alert("该问卷调查未填写完整，请检查！")-->
+<!--				}else{-->
+<!--					alert("提交成功！")-->
+<!--					$('#btn1').type=onsubmit();-->
+<!--				}-->
+<!--			}-->
+<!--		</script>-->
+	</body>
+</html>

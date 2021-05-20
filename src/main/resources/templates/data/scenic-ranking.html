@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>toplist</title>
+    <link rel="stylesheet" href="../../static/lib/layui-v2.5.5/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../static/css/public.css" media="all">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .toplist {
+            width: auto;
+            height: 500px;
+            border: 1px solid #FFFDF4;
+            margin: 0px auto;
+            box-sizing: border-box;
+        }
+
+        .toplist > h1 {
+            color: deeppink;
+            font-size: 20px;
+            border-bottom: 1px dashed #FFFDF4;
+            padding: 10px;
+        }
+
+        .toplist > ul {
+            list-style: none;
+        }
+
+        .toplist > ul li {
+            line-height: 30px;
+            border: 1px dashed #FFFDF4;
+            padding: 5px;
+        }
+
+        .toplist li > span {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background-color: #666;
+            margin-right: 10px;
+            line-height: 20px;
+            text-align: center;
+        }
+
+        /*li:nth-child(n+6)
+        选中从第6个开始的子元素
+        负方向范围
+        :nth-child(-n+9)
+        选中从第1个到第9个子元素。使用 :nth-child(-n+9) ，就相当让你选中第9个和其之前的所有子元素*/
+        /*.toplist ul li:nth-child(-n+3) span {*/
+        /*    background-color: deeppink;*/
+        /*}*/
+        .checked{
+            background-color: deeppink;
+        }
+
+        .content {
+            overflow: hidden;
+            display: none;
+        }
+
+        .toplist .content p {
+            font-size: 13px;
+
+        }
+
+        .content img {
+            float: left;
+            margin-right: 20px;
+            height: 150px;
+            width: 300px;
+        }
+
+        .content p {
+            width: 900px;
+            height: 150px;
+            float: left;
+        }
+
+        .toplist a {
+            text-decoration: none;
+            color: #000;
+        }
+
+        .current .content {
+            display: block;
+        }
+    </style>
+    <script src="../../static/lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
+    <script src="../../static/lib/jquery-3.4.1/jquery-3.4.1.min.js" charset="utf-8"></script>
+    <script src="../../static/lib/jquery-3.4.1/pagenation.js" charset="utf-8"></script>
+    <script>
+        $(function () {
+            var lis = $('.toplist li');
+
+            lis.hover(function () {
+                    $(this).addClass('current');
+                }
+                , function () {
+                    $(this).removeClass('current');
+                });
+        });
+    </script>
+</head>
+<body>
+<div class="toplist">
+    <input type="hidden" id="hidden" th:value="${count}">
+    <h1>景点排行榜</h1>
+<!--    <ul>-->
+<!--        <li>-->
+<!--            <span>1</span>-->
+<!--            <a href="#">[[${topScenic[0].getNAME()}]]</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="" >浏览人数：[[${topScenic[0].getVISITS()}]]</a>&nbsp;&nbsp;&nbsp;&nbsp; <a href="">位置：[[${topScenic[0].getLOCATION()}]]</a><br>-->
+<!--            <div class="content">-->
+<!--                <img th:src="@{${topScenic[0].getIMAGE()}}"-->
+<!--                     th:alt="${topScenic[0].getNAME()}">-->
+<!--                <p th:text="${topScenic[0].getINTRODUCTION()}"></p>-->
+<!--            </div>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--            <span>2</span>-->
+<!--            <a href="#">[[${topScenic[1].getNAME()}]]</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="" >浏览人数：[[${topScenic[1].getVISITS()}]]</a>&nbsp;&nbsp;&nbsp;&nbsp; <a href="">位置：[[${topScenic[1].getLOCATION()}]]</a><br>-->
+<!--            <div class="content">-->
+<!--                <img th:src="@{${topScenic[1].getIMAGE()}}"-->
+<!--                     th:alt="${topScenic[1].getNAME()}">-->
+<!--                <p th:text="${topScenic[1].getINTRODUCTION()}"></p>-->
+<!--            </div>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--            <span>3</span>-->
+<!--            <a href="#">[[${topScenic[2].getNAME()}]]</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="" >浏览人数：[[${topScenic[2].getVISITS()}]]</a>&nbsp;&nbsp;&nbsp;&nbsp; <a href="">位置：[[${topScenic[2].getLOCATION()}]]</a><br>-->
+<!--            <div class="content">-->
+<!--                <img th:src="@{${topScenic[2].getIMAGE()}}"-->
+<!--                     th:alt="${topScenic[2].getNAME()}">-->
+<!--                <p th:text="${topScenic[2].getINTRODUCTION()}"></p>-->
+<!--            </div>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--            <span>4</span>-->
+<!--            <a href="#">[[${topScenic[3].getNAME()}]]</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="" >浏览人数：[[${topScenic[3].getVISITS()}]]</a>&nbsp;&nbsp;&nbsp;&nbsp; <a href="">位置：[[${topScenic[3].getLOCATION()}]]</a><br>-->
+<!--            <div class="content">-->
+<!--                <img th:src="@{${topScenic[3].getIMAGE()}}"-->
+<!--                     th:alt="${topScenic[3].getNAME()}">-->
+<!--                <p th:text="${topScenic[3].getINTRODUCTION()}"></p>-->
+<!--            </div>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--            <span>5</span>-->
+<!--            <a href="#">[[${topScenic[4].getNAME()}]]</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="" >浏览人数：[[${topScenic[4].getVISITS()}]]</a>&nbsp;&nbsp;&nbsp;&nbsp; <a href="">位置：[[${topScenic[4].getLOCATION()}]]</a><br>-->
+<!--            <div class="content">-->
+<!--                <img th:src="@{${topScenic[4].getIMAGE()}}"-->
+<!--                     th:alt="${topScenic[4].getNAME()}">-->
+<!--                <p th:text="${topScenic[4].getINTRODUCTION()}"></p>-->
+<!--            </div>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--            <span>6</span>-->
+<!--            <a href="#">[[${topScenic[5].getNAME()}]]</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="" >浏览人数：[[${topScenic[5].getVISITS()}]]</a>&nbsp;&nbsp;&nbsp;&nbsp; <a href="">位置：[[${topScenic[5].getLOCATION()}]]</a><br>-->
+<!--            <div class="content">-->
+<!--                <img th:src="@{${topScenic[5].getIMAGE()}}"-->
+<!--                     th:alt="${topScenic[5].getNAME()}">-->
+<!--                <p th:text="${topScenic[5].getINTRODUCTION()}"></p>-->
+<!--            </div>-->
+<!--        </li>-->
+<!--    </ul>-->
+    <ul th:each="scenic:${topScenic}" id="all">
+        <li>
+            <span th:text="${scenicStat.index+1}" th:if="${scenicStat.index+1} le '3'" style="background-color: deeppink;"></span>
+            <span th:text="${scenicStat.index+1}" th:if="${scenicStat.index+1} gt '3'" ></span>
+            <a th:href="@{/toSelect/}+${scenic.ID}">[[${scenic.getNAME()}]]</a> &nbsp;&nbsp;&nbsp;&nbsp;<a th:href="@{/toSelect/}+${scenic.ID}" >浏览人数：[[${scenic.getVISITS()}]]</a>&nbsp;&nbsp;&nbsp;&nbsp; <a th:href="@{/toSelect/}+${scenic.ID}">位置：[[${scenic.getLOCATION()}]]</a><br>
+            <div class="content">
+                <img th:src="@{${scenic.getIMAGE()}}"
+                     th:alt="${scenic.getNAME()}">
+                <p th:text="${scenic.getINTRODUCTION()}"></p>
+            </div>
+        </li>
+    </ul>
+</div>
+<!--<div class="page" style="width: 300px;height: 400px">-->
+<!--    <div id="page">-->
+<!--        第<span id="a2"></span>/-->
+<!--        <span id="a1"></span>页 &nbsp;-->
+<!--        <span id="a3"></span>&nbsp;-->
+<!--        <a href="#" onclick="change(&#45;&#45;pageno)">上一页</a>&nbsp;-->
+<!--        <a href="#" onclick="change(++pageno)">下一页</a>-->
+<!--    </div>-->
+<!--</div>-->
+<!--<script>-->
+<!--    var zz=getzz()-->
+<!--    var pageno=1 ; //当前页-->
+<!--    var pagesize=10; //每页多少条信息-->
+<!--    if(zz.length%pagesize==0){-->
+<!--        var  pageall =zz.length/pagesize ;-->
+<!--    }else{-->
+<!--        var  pageall =parseInt(zz.length/pagesize)+1;-->
+<!--    }   //一共多少页-->
+<!--    change(1);-->
+<!--</script>-->
+</body>
+</html>
+

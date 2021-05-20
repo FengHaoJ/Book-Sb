@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>修改留言信息</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../static/lib/layui-v2.5.5/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../static/css/public.css" media="all">
+</head>
+<body>
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+    <legend>留言更改</legend>
+</fieldset>
+
+<form class="layui-form" lay-filter="example" th:action="@{/data/updatemessage}">
+    <input type="hidden" name="ID" th:value="${userMessage.getID()}">
+    <input type="hidden" name="UID" th:value="${userMessage.getUID()}">
+    <div class="layui-form-item">
+        <label class="layui-form-label required">留言标题</label>
+        <div class="layui-input-block" style="width: 300px">
+            <input id="input1" type="text" name="TITLE"   lay-verify="required" lay-reqtext="留言标题不能为空" autocomplete="off"class="layui-input" th:value="${userMessage.getTITLE()}">
+        </div>
+
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">留言内容</label>
+        <div class="layui-input-block">
+            <textarea class="layui-textarea" name="CONTENT" th:text="${userMessage.getCONTENT()}"></textarea>
+        </div>
+    </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">更改</button>
+        </div>
+    </div>
+</form>
+
+<script src="../../static/lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
+<script>
+    layui.use(['form'], function () {
+        var form = layui.form,
+            layer = layui.layer,
+            $ = layui.$;
+
+        //监听提交
+        form.on('submit(saveBtn)', function (data) {
+            var index = layer.alert(JSON.stringify(data.field), {
+                title: '最终的提交信息'
+            }, function () {
+
+                // 关闭弹出层
+                layer.close(index);
+
+                var iframeIndex = parent.layer.getFrameIndex(window.name);
+                parent.layer.close(iframeIndex);
+
+            });
+
+            return false;
+        });
+
+    });
+</script>
+</body>
+</html>

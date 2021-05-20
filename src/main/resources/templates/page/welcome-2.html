@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>首页三</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../static/lib/layui-v2.5.5/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../static/lib/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
+    <link rel="stylesheet" href="../../static/css/public.css" media="all">
+    <script src="../../static/echarts/echarts.min.js"></script>
+    <script src="../../static/js/jquery.min.js"></script>
+    <style>
+        .top-panel {
+            border: 1px solid #eceff9;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .top-panel > .layui-card-body {
+            height: 60px;
+        }
+
+        .top-panel-number {
+            line-height: 60px;
+            font-size: 30px;
+        }
+
+        .top-panel-tips {
+            line-height: 30px;
+            font-size: 12px
+        }
+    </style>
+</head>
+<body>
+<!--<div class="layuimini-container">-->
+<div class="layuimini-main">
+
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-xs12 layui-col-md3">
+
+            <div class="layui-card top-panel">
+                <div class="layui-card-header">景区数量</div>
+                <div class="layui-card-body">
+                    <div class="layui-row layui-col-space5">
+                        <div class="layui-col-xs9 layui-col-md12 top-panel-number">
+                            [[${countScenic}]]
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="layui-col-xs12 layui-col-md3">
+
+            <div class="layui-card top-panel">
+                <div class="layui-card-header">用户数量</div>
+                <div class="layui-card-body">
+                    <div class="layui-row layui-col-space5">
+                        <div class="layui-col-xs9 layui-col-md12 top-panel-number">
+                            [[${countUser}]]
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="layui-col-xs12 layui-col-md3">
+
+            <div class="layui-card top-panel">
+                <div class="layui-card-header">评价数量</div>
+                <div class="layui-card-body">
+                    <div class="layui-row layui-col-space5">
+                        <div class="layui-col-xs9 layui-col-md12 top-panel-number">
+                            [[${countMessage}]]
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="layui-col-xs12 layui-col-md3">
+
+            <div class="layui-card top-panel">
+                <div class="layui-card-header">我的足迹</div>
+                <div class="layui-card-body">
+                    <div class="layui-row layui-col-space5">
+                        <div class="layui-col-xs9 layui-col-md12 top-panel-number">
+                            [[${countLog}]]
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+<!--        <div class="layui-col-xs12 layui-col-md3">-->
+
+<!--            <div class="layui-card top-panel">-->
+<!--                <div class="layui-card-header">评价数量</div>-->
+<!--                <div class="layui-card-body">-->
+<!--                    <div class="layui-row layui-col-space5">-->
+<!--                        <div class="layui-col-xs9 layui-col-md12 top-panel-number">-->
+<!--                            [[${countMessage}]]-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--        </div>-->
+    </div>
+
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-xs12 layui-col-md12">
+            <div id="echarts-records" style="background-color:#ffffff;min-height:400px;padding: 10px"></div>
+        </div>
+    </div>
+
+
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-xs12 layui-col-md6">
+            <div id="main" style="background-color:#ffffff;min-height:300px;padding: 10px"></div>
+        </div>
+        <div class="layui-col-xs12 layui-col-md6">
+            <div id="echarts-map" style="background-color:#ffffff;min-height:300px;padding: 10px"></div>
+        </div>
+    </div>
+
+
+</div>
+<!--</div>-->
+<script src="../../static/lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
+<script src="../../static/js/lay-config.js?v=1.0.4" charset="utf-8"></script>
+<!--引入百度地图的jssdk，这里需要使用你在百度地图开发者平台申请的 ak-->
+<script src="http://api.map.baidu.com/api?v=2.0&ak=U6R4y4BWrGkSl2SXE83CCIPDGLgqD11k"></script>
+<!-- 引入 ECharts -->
+<script src="../../static/echarts/echarts.min.js"></script>
+<!-- 引入百度地图扩展 -->
+<script src="../../static/echarts/bmap.min.js"></script>
+<script src="../../static/echarts/esl.js"></script>
+
+<script th:inline="javascript">
+      //柱状图
+
+      // 基于准备好的dom，初始化echarts实例
+      var myChart = echarts.init(document.getElementById("main"));
+
+      myChart.setOption({
+        title: { text: "评论个数" },
+        tooltip: {},
+        legend: { data: ["评论个数"] },
+        xAxis: {
+          data: [],
+          axisLabel: {
+            inside: true,
+            textStyle: {
+              color: "#fff",
+            },
+            color: "#0177d4",
+            fontSize: 10 /* 代码如下： */,
+            formatter: function (value) {
+              return value.split("").join("\n");
+            },
+          },
+          axisTick: {
+            show: false,
+          },
+          axisLine: {
+            show: false,
+          },
+          z: 10,
+        },
+        yAxis: {
+          axisLine: {
+            show: false,
+          },
+          axisTick: {
+            show: false,
+          },
+          axisLabel: {
+            textStyle: {
+              color: "#999",
+            },
+          },
+        },
+        dataZoom: [
+          {
+            type: "inside",
+          },
+        ],
+        series: [
+          {
+            name: "评论个数",
+            type: "bar",
+            data: [],
+            showBackground: true,
+            itemStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                { offset: 0, color: "#83bff6" },
+                { offset: 0.5, color: "#188df0" },
+                { offset: 1, color: "#188df0" },
+              ]),
+            },
+            emphasis: {
+              itemStyle: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                  { offset: 0, color: "#2378f7" },
+                  { offset: 0.7, color: "#2378f7" },
+                  { offset: 1, color: "#83bff6" },
+                ]),
+              },
+            },
+          },
+        ],
+      });
+      $.ajax({
+        url: "/rest/user",
+        async: false,
+        cache: false,
+        success: function (data) {
+          myChart.setOption({
+            xAxis: { data: data.categories },
+            series: [{ name: "评论个数", data: data.data }],
+          });
+        },
+      });
+      var zoomSize = 6;
+myChart.on('click', function (params) {
+    console.log(dataAxis[Math.max(params.dataIndex - zoomSize / 2, 0)]);
+    myChart.dispatchAction({
+        type: 'dataZoom',
+        startValue: dataAxis[Math.max(params.dataIndex - zoomSize / 2, 0)],
+        endValue: dataAxis[Math.min(params.dataIndex + zoomSize / 2, data.length - 1)]
+    });
+});
+
+option && myChart.setOption(option);
+
+
+</script>
+<script>
+      /*
+         景区平均评分统计(折线图)
+       */
+      var myChart = echarts.init(document.getElementById("echarts-map"));
+
+      myChart.setOption({
+        title: { text: "景区平均评分" },
+        tooltip: {},
+        legend: { data: ["平均评分"] },
+        xAxis: {
+          data: [],
+        },
+        yAxis: {},
+
+        series: [
+          {
+            name: "平均评分",
+            type: "line",
+            data: [],
+            showBackground: true,
+          },
+        ],
+      });
+      $.ajax({
+        url: "/rest/user1",
+        async: false,
+        cache: false,
+        success: function (data) {
+          myChart.setOption({
+            xAxis: { data: data.categories },
+            series: [{ name: "平均评分", data: data.data }],
+          });
+        },
+      });
+
+</script>
+<script>
+      var chartDom = document.getElementById("echarts-records");
+      var myChart = echarts.init(chartDom);
+      var option;
+      var data = [];
+      var geoCoordMap = {};
+
+      $.ajax({
+        url: "/rest/user2",
+        async: false,
+        cache: false,
+        success: function (resp) {
+          console.info(resp);
+          data = resp.data;
+          geoCoordMap = resp.geoCoordMap;
+        },
+      });
+
+      var convertData = function (data) {
+        var res = [];
+        for (var i = 0; i < data.length; i++) {
+          var geoCoord = geoCoordMap[data[i].name];
+          if (geoCoord) {
+            res.push({
+              name: data[i].name,
+              value: geoCoord.concat(data[i].value),
+            });
+          }
+        }
+        return res;
+      };
+
+      option = {
+        title: {
+          text: "景区访问次数",
+          left: "center",
+        },
+        tooltip: {
+          trigger: "item",
+        },
+        bmap: {
+          center: [114.171925, 22.335915],
+          zoom: 12,
+          roam: true,
+          mapStyle: {
+            styleJson: [
+              {
+                featureType: "water",
+                elementType: "all",
+                stylers: {
+                  color: "#d1d1d1",
+                },
+              },
+              {
+                featureType: "land",
+                elementType: "all",
+                stylers: {
+                  color: "#f3f3f3",
+                },
+              },
+              {
+                featureType: "railway",
+                elementType: "all",
+                stylers: {
+                  visibility: "off",
+                },
+              },
+              {
+                featureType: "highway",
+                elementType: "all",
+                stylers: {
+                  color: "#fdfdfd",
+                },
+              },
+              {
+                featureType: "highway",
+                elementType: "labels",
+                stylers: {
+                  visibility: "off",
+                },
+              },
+              {
+                featureType: "arterial",
+                elementType: "geometry",
+                stylers: {
+                  color: "#fefefe",
+                },
+              },
+              {
+                featureType: "arterial",
+                elementType: "geometry.fill",
+                stylers: {
+                  color: "#fefefe",
+                },
+              },
+              {
+                featureType: "poi",
+                elementType: "all",
+                stylers: {
+                  visibility: "off",
+                },
+              },
+              {
+                featureType: "green",
+                elementType: "all",
+                stylers: {
+                  visibility: "off",
+                },
+              },
+              {
+                featureType: "subway",
+                elementType: "all",
+                stylers: {
+                  visibility: "off",
+                },
+              },
+              {
+                featureType: "manmade",
+                elementType: "all",
+                stylers: {
+                  color: "#d1d1d1",
+                },
+              },
+              {
+                featureType: "local",
+                elementType: "all",
+                stylers: {
+                  color: "#d1d1d1",
+                },
+              },
+              {
+                featureType: "arterial",
+                elementType: "labels",
+                stylers: {
+                  visibility: "off",
+                },
+              },
+              {
+                featureType: "boundary",
+                elementType: "all",
+                stylers: {
+                  color: "#fefefe",
+                },
+              },
+              {
+                featureType: "building",
+                elementType: "all",
+                stylers: {
+                  color: "#d1d1d1",
+                },
+              },
+              {
+                featureType: "label",
+                elementType: "labels.text.fill",
+                stylers: {
+                  color: "#999999",
+                },
+              },
+            ],
+          },
+        },
+        series: [
+          {
+            name: "访问次数",
+            type: "scatter",
+            coordinateSystem: "bmap",
+            data: convertData(data),
+            symbolSize: function (val) {
+              return val[2] / 10;
+            },
+            encode: {
+              value: 2,
+            },
+            label: {
+              formatter: "{b}",
+              position: "right",
+              show: false,
+            },
+            emphasis: {
+              label: {
+                show: true,
+              },
+            },
+          },
+          {
+            name: "Top 5",
+            type: "effectScatter",
+            coordinateSystem: "bmap",
+            data: convertData(
+              data
+                .sort(function (a, b) {
+                  return b.value - a.value;
+                })
+                .slice(0, 6)
+            ),
+            symbolSize: function (val) {
+              return val[2] / 10;
+            },
+            encode: {
+              value: 2,
+            },
+            showEffectOn: "render",
+            rippleEffect: {
+              brushType: "stroke",
+            },
+            hoverAnimation: true,
+            label: {
+              formatter: "{b}",
+              position: "right",
+              show: true,
+            },
+            itemStyle: {
+              shadowBlur: 10,
+              shadowColor: "#333",
+            },
+            zlevel: 1,
+          },
+        ],
+      };
+
+      option && myChart.setOption(option);
+
+</script>
+</body>
+</html>

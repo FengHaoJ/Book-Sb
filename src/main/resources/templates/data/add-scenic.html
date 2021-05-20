@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加景点</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../static/lib/layui-v2.5.5/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../static/css/public.css" media="all">
+</head>
+<body>
+<form class="layui-form" action="/addScenic">
+    <div class="layui-form-item">
+        <label class="layui-form-label">景点名称</label>
+        <div class="layui-input-block">
+            <input type="text" name="NAME" lay-verify="title" autocomplete="off" placeholder="请输入景点名称"
+                   class="layui-input">
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+
+        <div class="layui-inline">
+            <label class="layui-form-label">拥挤程度</label>
+            <div class="layui-input-inline">
+                <select name="CROWD" lay-verify="required">
+                    <option value="正常">正常</option>
+                    <option value="拥挤">拥挤</option>
+                    <option value="非常拥挤">非常拥挤</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">地址</label>
+        <div class="layui-input-block">
+            <input type="text" name="LOCATION" lay-verify="title1" autocomplete="off" placeholder="请输入景点位置"
+                   class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-inline">
+        <label class="layui-form-label">开放时间</label>
+        <div class="layui-input-inline">
+            <input type="text" name="OPENING" class="layui-input" lay-verify="title2" id="test9" placeholder=" 00:00-00:00 ">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <br> <label class="layui-form-label">价格</label>
+        <div class="layui-input-inline">
+            <input type="text" name="PRICE" lay-verify="required" placeholder="请输入价格" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">景点介绍</label>
+        <div class="layui-input-block">
+            <textarea name="INTRODUCTION" placeholder="请输入内容" class="layui-textarea"></textarea>
+        </div>
+    </div>
+    <!--<div class="layui-form-item layui-form-text">
+      <label class="layui-form-label">编辑器</label>
+      <div class="layui-input-block">
+        <textarea class="layui-textarea layui-hide" name="content" lay-verify="content" id="LAY_demo_editor"></textarea>
+      </div>
+    </div>-->
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即添加</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+
+<script src="../../static/lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script>
+layui.use('laydate', function(){
+  var laydate = layui.laydate;
+  //时间范围
+  laydate.render({
+    elem: '#test9'
+    ,type: 'time'
+    ,range: true
+  });
+  });
+
+<!---->
+layui.use(['form', 'layedit', 'laydate'], function(){
+  var form = layui.form
+  ,layer = layui.layer
+  ,layedit = layui.layedit
+  ,laydate = layui.laydate;
+
+  //自定义验证规则
+  form.verify({
+    title: function(value){
+      if(value.length == 0){
+        return '景点名称不能为空';
+      }
+    }
+  });
+
+    form.verify({
+    title1: function(value){
+      if(value.length == 0){
+        return '地址不能为空';
+      }
+    }
+  });
+
+    form.verify({
+    title2: function(value){
+      if(value.length == 0){
+        return '请选择时间范围';
+      }
+    }
+  });
+
+    form.verify({
+    required: function(value){
+      if(value.length == 0){
+        return '请输入价格';
+      }
+    }
+  });
+
+});
+
+</script>
+</body>
+</html>

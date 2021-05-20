@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>cssmoban</title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <link href="../../static/templatemo_style.css" rel="stylesheet" type="text/css"/>
+
+</head>
+<body>
+<!-- <div class="adcenter"><script src="http://www.cssmoban.com/include/new/ggad2_728x90.js"></script></div> -->
+
+<span id="top"></span>
+<div id="templatemo_wrapper">
+    <div id="templatmeo_header">
+        <div id="site_title">
+            <h1><a href="#">Free CSS Templates</a></h1>
+        </div>
+        <div id="templatemo_menu">
+            <ul>
+                <li><a href="#home">景区主页</a></li>
+                <li><a href="#aboutus">关于我们</a></li>
+                <li><a href="#services">服务</a></li>
+                <!-- <li><a href="#portfolio">Portfolio</a></li> -->
+                <li class="last"><a href="#contactus">联系我们</a></li>
+            </ul>
+        </div> <!-- end of templatemo_menu -->
+    </div> <!-- end of header -->
+
+    <div id="templatemo_main">
+
+        <div id="home" class="content_top"></div>
+        <div class="content_box">
+            <div class="content_title content_home"></div>
+
+            <h2>介绍我们的景区</h2>
+            <div class="image_wrapper image_fl"><img th:src="@{${filename}}" height="150px" width="300px" alt="图片"><span></span></div>
+
+            <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;[[${INTRODUCTION}]]</p>
+
+            <div class="cleaner h30"></div>
+
+            <div class="col_w310 float_l">
+                <h3>最新动态</h3>
+                <ul class="tmo_list">
+                    <li><a href="#">探秘神奇的耳朵！</a></li>
+                    <li><a href="#">快来围观！带你走进明星象“阿莲”的世界！</a></li>
+                    <li><a href="#">探秘车入区的“速度与激情”，超燃！</a></li>
+                    <li><a href="#">“欢乐礼遇 年卡套餐”限时特卖啦！</a></li>
+                    <li><a href="#">谁才是最会吃“汤圆”的“干饭人”？</a></li>
+                </ul>
+            </div>
+
+            <div class="col_w310 float_r">
+                <h3>上海野生动物园门票价格</h3>
+                <blockquote>
+                    <p> 成人票 130元；学生票 65元；60-64周岁老人票 117元；65周岁以上老人票 65元</p>
+
+            </div>
+
+            <div class="cleaner"></div>
+            <a href="#" class="gototop">Go To Top</a>
+        </div>
+        <div >
+
+            <p style="text-align:center; font-weight: bold;font-size: large;">Copyright © 2021 河南大学 版权所有 </p>
+
+            <div class="cleaner"></div>
+        </div>
+
+    </div>
+    <style>
+        .copyrights{text-indent:-9999px;height:0;line-height:0;font-size:0;overflow:hidden;}
+    </style>
+    <div >
+
+    </div>
+</body>
+</html>

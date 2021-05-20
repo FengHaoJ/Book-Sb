@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>用户数据</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../static/lib/layui-v2.5.5/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../static/css/public.css" media="all">
+</head>
+<body>
+<!--<blockquote class="layui-elem-quote news_search">-->
+<!--    <div class="layui-inline">-->
+<!--        <form th:action="@{/data/selectTUser}" th:method="post" class="layui-inline"></form>-->
+<!--        <div class="layui-input-inline">-->
+<!--            <input type="text" name="ID" placeholder="请输入用户ID" class="layui-input search_input"/>-->
+<!--        </div>-->
+<!--        <button class="layui-btn search_btn" type="submit">查询</button>-->
+<!--        </form>-->
+<!--        <div style="display: inline">-->
+<!--            <a th:href="@{/data/data-user}" class="layui-btn layui-btn-danger">重置</a>-->
+<!--                        <p th:text="${speak}" style="color:red; display:inline"></p>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</blockquote>-->
+<blockquote class="layui-elem-quote news_search">
+    <div class="layui-inline">
+        <form class="layui-inline" th:action="@{/selectTUser}" method="post">
+            <div class="layui-input-inline">
+                <input type="text" name="USERNAME" placeholder="请输入用户名" class="layui-input search_input"/>
+            </div>
+            <button type="submit" class="layui-btn serch_btn">查询</button>
+        </form>
+    </div>
+    <div class="layui-inline">
+        <a class="layui-btn layui-btn-normal newsAdd_btn" href="/data/add-tuser">添加用户信息</a>
+    </div>
+    <div class="layui-inline">
+        <a class="layui-btn layui-btn-danger" href="/data/data-user">重置</a>
+    </div>
+    <div style="display: inline;font-size: 18px">
+        <p th:text="${speak}" style="color: skyblue; display: inline"></p>
+    </div>
+</blockquote>
+<div class="layui-form news_list">
+    <table class="layui-table">
+        <colgroup>
+            <col width="8%"/>
+            <col width="10%"/>
+            <col width="15%"/>
+            <col width="25%"/>
+            <col width="10%"/>
+
+        </colgroup>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>用户名</th>
+            <th>密码</th>
+            <th>性别</th>
+            <th>昵称</th>
+            <th>电话号码</th>
+            <th>位置</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody class="news_content">
+        <tr th:each="u : ${list}">
+            <td th:text="${u.ID}"></td>
+            <td th:text="${u.USERNAME}"></td>
+            <td th:text="${u.PASSWORD}"></td>
+            <td th:text="${u.SEX}"></td>
+            <td th:text="${u.NICKNAME}"></td>
+            <td th:text="${u.PHONENUMBER}"></td>
+            <td th:text="${u.POSITION}"></td>
+            <td>
+                <a class="layui-btn layui-btn-xs" >
+                    <i class="layui-icon">&#xe60a;</i>
+                </a>
+                <a class="layui-btn layui-btn-xs layui-btn-normal" th:href="@{/updateTUser/{id}(id=${u.ID})}" >
+                    <i class="layui-icon">&#xe642;</i>
+                </a>
+                <a class="layui-btn layui-btn-xs layui-btn-danger" th:href="@{/deleteTUser/{id}(id=${u.ID})}" >
+                    <i class="layui-icon">&#xe640;</i>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div style="color: skyblue;font-size: 18px">当前第 <span th:text="${pageInfo.pageNum}"></span> 页,总 <span
+            th:text="${pageInfo.pages}"></span> 页,共 <span
+            th:text="${pageInfo.total}"></span> 条记录
+    </div>
+    <a class="layui-btn toPageOne" th:href="@{/data/data-user}">首页</a>
+    <a class="layui-btn previousPage"
+       th:href="@{/data/data-user(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}">上一页</a>
+    <a class="layui-btn nextPage"
+       th:href="@{/data/data-user(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}">下一页</a>
+<!--    <a class="layui-btn toPageLast" th:href="@{/data/data-user(pageNum=${pageInfo.pages})}">尾页</a>-->
+
+</div>
+
+
+<!--<form class="layui-form" id="pageForm" name="pageForm" action="/userList" method="post">-->
+<!--    <div class="layui-table-page">-->
+<!--        <div id="layui-table-page1">-->
+<!--            <div class="layui-box layui-laypage layui-laypage-default" id="layui-laypage-2">-->
+<!--                <span class="layui-laypage-count" ></span>&lt;!&ndash;th:text="'共'+${pageParam.count}+'条'"&ndash;&gt;-->
+<!--                <span class="layui-laypage-skip"><input type="number" name="pageNumber" id="pageNumber" class="layui-input"/></span>&lt;!&ndash; th:value="${pageParam.pageNumber}" &ndash;&gt;-->
+<!--                <span class="layui-laypage-limits">-->
+<!--						<a class="layui-btn toPage">跳转</a>-->
+<!--						<a class="layui-btn toPageOne">首页</a>-->
+<!--						<a class="layui-btn previousPage"><i class="layui-icon"></i></a>-->
+<!--						<a class="layui-btn nextPage"><i class="layui-icon"></i></a>-->
+<!--						<a class="layui-btn toPageLast">尾页</a>-->
+<!--					</span>-->
+<!--                <span class="layui-laypage-count"></span>&lt;!&ndash;th:text="'共'+${pageParam.size}+'页'"&ndash;&gt;-->
+<!--                <span class="layui-laypage-limits">-->
+<!--&lt;!&ndash;						<select lay-ignore="" id="pageSize" name="pageSize">&ndash;&gt;-->
+<!--                    &lt;!&ndash;							<option value="10" th:selected="${pageParam.pageSize==10?'selected':'false'}">10 条/页</option>&ndash;&gt;-->
+<!--                    &lt;!&ndash;							<option value="20" th:selected="${pageParam.pageSize==20?'selected':'false'}">20 条/页</option>&ndash;&gt;-->
+<!--                    &lt;!&ndash;							<option value="30" th:selected="${pageParam.pageSize==30?'selected':'false'}">30 条/页</option>&ndash;&gt;-->
+<!--                    &lt;!&ndash;							<option value="40" th:selected="${pageParam.pageSize==40?'selected':'false'}">40 条/页</option>&ndash;&gt;-->
+<!--                    &lt;!&ndash;							<option value="50" th:selected="${pageParam.pageSize==50?'selected':'false'}">50 条/页</option>&ndash;&gt;-->
+<!--                    &lt;!&ndash;							<option value="60" th:selected="${pageParam.pageSize==60?'selected':'false'}">60 条/页</option>&ndash;&gt;-->
+<!--                    &lt;!&ndash;							<option value="70" th:selected="${pageParam.pageSize==70?'selected':'false'}">70 条/页</option>&ndash;&gt;-->
+<!--                    &lt;!&ndash;							<option value="80" th:selected="${pageParam.pageSize==80?'selected':'false'}">80 条/页</option>&ndash;&gt;-->
+<!--                    &lt;!&ndash;							<option value="90" th:selected="${pageParam.pageSize==90?'selected':'false'}">90 条/页</option>&ndash;&gt;-->
+<!--                    &lt;!&ndash;							<option value="100" th:selected="${pageParam.pageSize==100?'selected':'false'}">100 条/页</option>&ndash;&gt;-->
+<!--                    &lt;!&ndash;						</select>&ndash;&gt;-->
+<!--					</span>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <input type="hidden" id="count" name="count"/>&lt;!&ndash; th:value="${pageParam.count}"&ndash;&gt;-->
+<!--    <input type="hidden" id="size" name="size"/>&lt;!&ndash;th:value="${pageParam.size}"&ndash;&gt;-->
+<!--</form>-->
+<script src="../../static/lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
+<!--<script>-->
+<!--    function keyUp(e){-->
+<!--        var evt = window.event || e;-->
+<!--        var pageNum = document.getElementById("pageNum").value;-->
+<!--        if(evt.keyCode == 13) {-->
+<!--            window.location.href="/toPage/" + pageNum;-->
+<!--        }-->
+<!--    }</script>-->
+</body>
+</html>

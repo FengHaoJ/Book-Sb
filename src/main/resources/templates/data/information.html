@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="../../static/layui/css/layui.css"><!-- //连接到本地的layui文件 -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<script src="../../static/layui/layui.js"></script><!-- //导入script文件 -->
+<head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <script src="../../static/layui/layui.js"></script>
+</head>
+<body>
+<ul class="layui-nav" lay-filter="">
+    <li class="layui-nav-item"><a href="">个人资料</a></li>
+</ul>
+<div>
+    基本信息
+</div>
+<div id="ce">
+    <form class="layui-form" action="/changeMessage" method="post">
+
+        <div class="layui-form-item" style="">
+            <label class="layui-form-label">用户名</label>
+            <div class="layui-input-block" style="width: 300px;">
+                <input type="text" name="USERNAME" th:value="${user.USERNAME}" placeholder="请输入用户名" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">性别</label>
+            <div class="layui-input-block">
+                <input id="ra1" type="radio" name="SEX" value="男" title="男" checked>
+                <input id="ra2" type="radio" name="SEX" value="女" title="女">
+            </div>
+        </div>
+        <!-- <div class="layui-form-item">
+            <label class="layui-form-label">年龄</label>
+            <div class="layui-input-block" style="width: 120px;">
+                <input type="text" name="" placeholder="请输入" autocomplete="off"
+                    class="layui-input">
+            </div>
+        </div> -->
+        <div class="layui-form-item" style="">
+            <label class="layui-form-label">昵称</label>
+            <div class="layui-input-block" style="width: 300px;">
+                <input type="text" name="NICKNAME" th:value="${user.NICKNAME}" placeholder="请输入昵称" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item" style="">
+            <label class="layui-form-label">电话号码</label>
+            <div class="layui-input-block" style="width: 300px;">
+                <input type="text" name="PHONENUMBER" th:value="${user.PHONENUMBER}" placeholder="请输入电话号码"
+                       autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">所在地区</label>
+            <div class="layui-input-block" style="width: 300px;">
+                <select name="POSITION" lay-filter="aihao">
+                    <option value="北京">北京</option>
+                    <option value="上海">上海</option>
+                    <option value="天津">天津</option>
+                    <option value="重庆">重庆</option>
+                    <option value="辽宁">辽宁</option>
+                    <option value="吉林">吉林</option>
+                    <option value="黑龙江">黑龙江</option>
+                    <option value="河北">河北</option>
+                    <option value="山西">山西</option>
+                    <option value="陕西">陕西</option>
+                    <option value="甘肃">甘肃</option>
+                    <option value="青海">青海</option>
+                    <option value="山东">山东</option>
+                    <option value="安徽">安徽</option>
+                    <option value="江苏">江苏</option>
+                    <option value="浙江">浙江</option>
+                    <option value="河南">河南</option>
+                    <option value="湖北">湖北</option>
+                    <option value="湖南">湖南</option>
+                    <option value="江西">江西</option>
+                    <option value="台湾">台湾</option>
+                    <option value="福建">福建</option>
+                    <option value="云南">云南</option>
+                    <option value="海南">海南</option>
+                    <option value="四川">四川</option>
+                    <option value="贵州">贵州</option>
+                    <option value="广东">广东</option>
+                    <option value="内蒙古">内蒙古</option>
+                    <option value="新疆">新疆</option>
+                    <option value="广西">广西</option>
+                    <option value="西藏">西藏</option>
+                    <option value="宁夏">宁夏</option>
+                    <option value="香港">香港</option>
+                    <option value="澳门">澳门</option>
+                </select>
+            </div>
+        </div>
+        <!-- <div class="layui-form-item layui-form-text"
+            style="margin: 0px 0px 0px 25px; width: 600px;">
+            <label class="layui-form-label">个人介绍</label>
+            <div class="layui-input-block">
+                <textarea placeholder="请填写内容" class="layui-textarea"></textarea>
+            </div>
+        </div> -->
+        <div class="layui-form-item" style="margin: 0px 0px 0px 100px;">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="*">立即保存</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+
+    </form>
+
+</div>
+<script src="../../static/layui/layui.js"></script>
+
+
+<script>
+				//Demo
+				layui.use('form', function() {
+					var form = layui.form;
+		
+					//监听提交
+					form.on('submit(formDemo)', function(data) {
+						layer.msg(JSON.stringify(data.field));
+						return false;
+					});
+				});
+
+
+
+</script>
+<script>
+				//注意：导航 依赖 element 模块，否则无法进行功能性操作
+				layui.use('element', function() {
+					var element = layui.element;
+				});
+
+
+
+</script>
+<script>
+				layui.use('util', function() {
+					var util = layui.util;
+		
+					//执行
+					util.fixbar({
+						bar1 : true,
+						bar2 : true,
+						click : function(type) {
+							console.log(type);
+							if (type === 'bar1') {
+								alert('点击了bar1')
+							}
+						}
+					});
+				});
+
+
+
+</script>
+</body>
+</html>

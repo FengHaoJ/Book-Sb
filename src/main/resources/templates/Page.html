@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <title>Title</title>
+</head>
+<body>
+<form action="/test1/upload" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="ID" th:value="${ID}"/>
+    <input type="file" name="file" accept="image/*">
+    <br>
+    <input type="submit" value="上传" class="btn btn-success">
+</form>
+<br>
+<img th:src="@{${filename1}}"  height="150px" width="300px" alt="图片">
+</body>
+</html>
